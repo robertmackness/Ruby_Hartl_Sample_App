@@ -4,8 +4,14 @@ class UserTest < ActiveSupport::TestCase
 
   #run before each test
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com")
-    @user2 = User.new(name: "Example User 2", email: "user2@example.com")
+    @user = User.new( name: "Example User", 
+                      email: "user@example.com",
+                      password: "foobar",
+                      password_confirmation: "foobar")
+    @user2 = User.new(name: "Example User 2", 
+                      email: "user2@example.com",
+                      password: "foobar2",
+                      password_confirmation: "foobar2")
   end
 
   test "should be valid" do
@@ -34,6 +40,23 @@ class UserTest < ActiveSupport::TestCase
 
   test "email should not be longer than 255 characters" do 
     @user.email = "a"*255 + "@example.com"
+    assert_not @user.valid?
+  end
+
+  test "email addresses should be unique" do 
+    duplicate_user = @user.dup 
+    duplicate_user.email.upcase!
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
+  test "passwords should be present (nonblank)" do 
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
 

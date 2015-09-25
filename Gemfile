@@ -20,6 +20,8 @@ gem 'turbolinks', '2.3.0'
 gem 'jbuilder', '2.2.3'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '0.4.0', group: :doc
+# Use bcrypt to create password digests by running user passwords through a hash function
+gem 'bcrypt', '3.1.7'
 
 group :production do
   gem 'pg', '0.17.1'
