@@ -1,3 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# see Chapter 8
+#this will be available as a :example_user1 symbol in tests
+example_user1:
+  name: Example Exampler
+  email: example@example.com
+  password_digest: <%= User.digest('password') %>

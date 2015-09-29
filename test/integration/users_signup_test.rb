@@ -25,6 +25,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     assert_template 'users/show'
     assert_not_empty flash
+    #Tests don't have access to helper methods so we put this method in test_helper.rb 
+    assert is_logged_in?
   end
 
 end
