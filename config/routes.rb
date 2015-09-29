@@ -1,12 +1,30 @@
 Rails.application.routes.draw do
 
-
   root             'static_pages#home'
-  get 'help'    => 'static_pages#help'
-  get 'about'   => 'static_pages#about'
-  get 'contact' => 'static_pages#contact'
-  get 'signup'  => 'users#new'
+
+  #creates routes such as help_path 
+  get     'help'    =>  'static_pages#help'
+  get     'about'   =>  'static_pages#about'
+  get     'contact' =>  'static_pages#contact'
+  get     'signup'  =>  'users#new'
+
+  #  creates RESTful routes for interacting with User resource
+  #
+  #  HTTP     URL                Action    Named Route               Purpose
+  #
+  #  GET      /users             index     users_path                page to list all users
+  #  GET      /users/id          show      user_path(user)           page to show user
+  #  GET      /users/new         new       new_user_path             page to make new user
+  #  POST     /users             create    users_path                action to create a new user
+  #  GET      /users/edit/id     edit      edit_user_path(user)      page to edit a user
+  #  PATCH    /users/id          update    user_path(user)           action to update user
+  #  DELETE   /users/id          destroy   user_path(user)           action to delete user
   resources :users
+
+
+  get     'login'   =>  'sessions#new'
+  post    'login'   =>  'sessions#create'
+  delete  'logout'  =>  'sessions#destroy'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
