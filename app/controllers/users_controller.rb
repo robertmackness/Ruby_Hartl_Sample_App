@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :index]
   before_action :correct_user, only: [:edit, :update]
 
   def new
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   # BEFORE FILTERS
   def logged_in_user
     unless logged_in?
-      store_location #See sessions helper; this stores the request.url for friendly forwarding
+      store_location #See sessions helper; this stores the GET request.url for friendly forwarding
       flash[:danger] = "Please login first."
       redirect_to login_url
     end
@@ -45,6 +45,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  def index
+    @user = User.all
+  end
+
+
 
   private
 
