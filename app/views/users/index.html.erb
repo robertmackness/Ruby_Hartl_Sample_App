@@ -3,11 +3,11 @@
 
 <%= will_paginate %>
   <ul class = "users">
-    <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for user, size: 50 %>
-      <%= link_to user.name, user %>
-    </li>
-    <% end %>
+    <%= render @users %>
   </ul>
 <%= will_paginate %>
+
+<!--  ### Warning, Rails Magic ahead ###
+render @users is translated by Rails into: @users.each do |user| {render @user}
+render user looks for a user partial to render, in our case _user.html.erb
+ -->
