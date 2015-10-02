@@ -22,6 +22,8 @@ gem 'jbuilder', '2.2.3'
 gem 'sdoc', '0.4.0', group: :doc
 # Use bcrypt to create password digests by running user passwords through a hash function
 gem 'bcrypt', '3.1.7'
+# User faker to create fake usernames for populating database
+gem 'faker', '1.4.2'
 
 group :production do
   gem 'pg', '0.17.1'
