@@ -22,8 +22,11 @@ gem 'jbuilder', '2.2.3'
 gem 'sdoc', '0.4.0', group: :doc
 # Use bcrypt to create password digests by running user passwords through a hash function
 gem 'bcrypt', '3.1.7'
-# User faker to create fake usernames for populating database
+# Create fake usernames for populating database
 gem 'faker', '1.4.2'
+# Add easy to use pagination gems and related bootstrap CSS
+gem 'will_paginate', '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 group :production do
   gem 'pg', '0.17.1'
