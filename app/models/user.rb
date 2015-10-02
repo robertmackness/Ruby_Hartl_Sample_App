@@ -12,7 +12,11 @@ class User < ActiveRecord::Base
                     uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password,  length: {minimum: 6, maximum: 20},
-                        presence: true
+                        presence: true,
+                        allow_nil: true # note that has_secure_password runs a presence validation
+                                        # on password and password_confirmation too so during updates
+                                        # the user can submit empty password and password_confirmation
+                                        # ONLY if they already exist
 
 
  

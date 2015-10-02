@@ -1,5 +1,12 @@
 #this will be available as a :example_user1 symbol in tests
 example_user1:
-  name: Example Exampler
+  id: 1
+  name: Example User1
   email: example@example.com
+  password_digest: <%= User.digest('password') %>
+
+example_user2:
+  id: 2
+  name: Example User2
+  email: example2@example.com
   password_digest: <%= User.digest('password') %>
