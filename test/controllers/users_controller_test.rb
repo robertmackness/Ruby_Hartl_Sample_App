@@ -5,6 +5,7 @@ class UsersControllerTest < ActionController::TestCase
   def setup
     @user1 = users(:example_user1)
     @user2 = users(:example_user2)
+    @admin_user = users(:admin_user)
   end
 
   test "should GET new" do
@@ -42,6 +43,22 @@ class UsersControllerTest < ActionController::TestCase
   test "should redirect GET index if not logged in" do
     get :index
     assert_redirected_to login_path
+  end
+
+
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user2
+    end
+    assert_redirected_to login_url
+  end
+
+  test "should redirect destroy when logged in as a non-admin" do
+    log_in_as @user1
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user2
+    end
+    assert_redirected_to root_url
   end
 
 end
