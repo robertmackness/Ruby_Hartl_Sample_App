@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
 
   root             'static_pages#home'
-
   #creates routes such as help_path 
   get     'help'    =>  'static_pages#help'
   get     'about'   =>  'static_pages#about'
   get     'contact' =>  'static_pages#contact'
   get     'signup'  =>  'users#new'
-
   #  creates RESTful routes for interacting with User resource
   #
   #  HTTP     URL                Action    Named Route               Purpose
@@ -20,13 +18,11 @@ Rails.application.routes.draw do
   #  PATCH    /users/id          update    user_path(user)           action to update user
   #  DELETE   /users/id          destroy   user_path(user)           action to delete user
   resources :users
-
-
   get     'login'   =>  'sessions#new'
   post    'login'   =>  'sessions#create'
   delete  'logout'  =>  'sessions#destroy'
-
   resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

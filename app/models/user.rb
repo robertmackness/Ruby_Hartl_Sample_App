@@ -52,6 +52,17 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
+  # Activates an account
+  def activate
+    self.update_attribute(:activated, true)
+    self.update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # Sends activation email
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
 # ############ PRIVATE ###############
 
   private
