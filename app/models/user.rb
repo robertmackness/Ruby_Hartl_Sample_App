@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+  # the has_many association method can take a hash of options. dependant: :destroy 
+  # ensures that when a user is destroyed, all associated microposts are also destroyed
+  has_many :microposts, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
