@@ -36,13 +36,7 @@ class UsersController < ApplicationController
   end
 
   # BEFORE FILTERS
-  def logged_in_user
-    unless logged_in?
-      store_location #See sessions helper; this stores the GET request.url for friendly forwarding
-      flash[:danger] = "Please login first."
-      redirect_to login_url
-    end
-  end
+  # note - logged_in_user has been moved to the ApplicationController class
 
   def edit
   @user = User.find(params[:id])
