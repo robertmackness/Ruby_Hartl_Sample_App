@@ -6,6 +6,10 @@ gem 'rails', '4.2.4'
 # Use SCSS and Bootstrap for stylesheets
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'sass-rails', '5.0.2'
+# Use carrierwave to upload files, and mini_magick and fog to resize them
+gem 'carrierwave', '0.10.0'
+gem 'mini_magick', '3.8.0'
+gem 'fog',  '1.26.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.5.3'
 # Use CoffeeScript for .coffee assets and views
