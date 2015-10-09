@@ -85,6 +85,11 @@ class User < ActiveRecord::Base
     self.reset_sent_at < 2.hours.ago
   end
 
+  # Defines a feed for the user
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
 # ############ PRIVATE ###############
 
   private
