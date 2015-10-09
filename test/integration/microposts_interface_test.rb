@@ -4,6 +4,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:example_user1)
+    @user2 = users(:example_user2)
     @content = "This is just some example content"
   end
 
@@ -35,7 +36,18 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     # Visit a different user, ensure no delete option avail
     get user_path(users(:example_user2))
     assert_select 'a', text: 'delete', count: 0
+  end
 
+  test "pluralization for microposts" do 
+    log_in_as @user2 
+    get root_path
+    assert_match "#{@user2.microposts.count} microposts", response.body
+    delete micropost_path(@user2.microposts.last)
+    get root_path
+    assert_match '1 micropost', response.body
+    delete micropost_path(@user2.microposts.first)
+    get root_path
+    assert_match '0 microposts', response.body
   end
 
 end
