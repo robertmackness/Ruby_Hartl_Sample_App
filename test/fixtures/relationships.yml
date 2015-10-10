@@ -1,1 +1,15 @@
-# empty as to not interfere with current testing
+one:
+  follower: bert
+  followed: big_bird
+
+two:
+  follower: the_count
+  followed: bert
+
+three:
+  follower: big_bird
+  followed: the_count
+
+four:
+  follower: bert
+  followed: the_count

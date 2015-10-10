@@ -90,4 +90,23 @@ class UserTest < ActiveSupport::TestCase
     assert_not elmo.following?(grouch)
   end
 
+  test "feed should have the right posts" do
+    bert      = users(:bert)
+    big_bird  = users(:big_bird)
+    the_count = users(:the_count)
+    elmo      = users(:example_user1)
+    # Posts from followed user
+    the_count.microposts.each do |followed_posts|
+      assert bert.feed.include?(followed_posts)
+      assert big_bird.feed.include?(followed_posts)
+    end
+    # Posts from self
+    bert.microposts.each do |self_posts|
+      assert bert.feed.include?(self_posts)
+    end
+    # Posts from unfollowed user
+    big_bird.microposts.each do |unfollowed_posts|
+      assert_not elmo.feed.include?(unfollowed_posts)
+    end
+  end
 end

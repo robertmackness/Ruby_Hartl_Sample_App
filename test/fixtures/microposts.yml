@@ -4,12 +4,12 @@ orange:
   user: example_user1
 
 tau_manifesto:
-  content: "Check out the @tauday site by @mhartl: http://tauday.com"
+  content: "hyuk hyuk"
   created_at: <%= 3.years.ago %>
   user: example_user1
 
 cat_video:
-  content: "Sad cats are sad: http://youtu.be/PKffm2uI4dk"
+  content: "Sad cats are sad"
   created_at: <%= 2.hours.ago %>
   user: example_user2
 
@@ -17,6 +17,23 @@ most_recent:
   content: "Writing a short test"
   created_at: <%= Time.zone.now %>
   user: example_user2
+
+orange:
+  content: "I just ate an orange!"
+  created_at: <%= 10.minutes.ago %>
+  user: bert
+
+banana:
+  content: "I just ate an orange!"
+  created_at: <%= 10.minutes.ago %>
+  user: the_count
+
+pineapple:
+  content: "I just ate an orange!"
+  created_at: <%= 10.minutes.ago %>
+  user: big_bird
+
+
 
 <% 30.times do |n| %>
 micropost_<%= n %>:

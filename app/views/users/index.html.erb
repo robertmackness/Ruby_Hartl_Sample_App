@@ -1,12 +1,15 @@
 <% provide(:title, 'All users') %>
+
 <h1>All users</h1>
-
-<%= will_paginate %>
-  <ul class = "users">
-    <%= render @users %>
-  </ul>
-<%= will_paginate %>
-
+<div class="row user_index">
+  <div class="user_index_paginate pagination">
+  <%= will_paginate %>
+    <ul class = "users">
+      <%= render @users %>
+    </ul>
+  <%= will_paginate %>
+  </div>
+</div>
 <!--  ### Warning, Rails Magic ahead ###
 render @users is translated by Rails into: @users.each do |user| {render @user}
 render user looks for a user partial to render, in our case _user.html.erb

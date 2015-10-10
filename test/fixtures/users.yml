@@ -1,13 +1,13 @@
 #this will be available as a :example_user1 symbol in tests
 example_user1:
-  name: Example User1
+  name: Elmo
   email: example@example.com
   password_digest: <%= User.digest('password') %>
   activated: true
   activated_at: <%= Time.zone.now %>
 
 example_user2:
-  name: Example User2
+  name: Grouch
   email: example2@example.com
   password_digest: <%= User.digest('password') %>
   activated: true
@@ -21,7 +21,29 @@ admin_user:
   activated: true
   activated_at: <%= Time.zone.now %>
 
-<% 50.times do |n| %>
+bert:
+  name: Bert
+  email: bert@example.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+the_count:
+  name: The Count
+  email: count@example.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+big_bird:
+  name: Big Bird
+  email: bird@example.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
+
+<% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User #{n}" %>
   email: <%= "user-#{n}@example.com" %>
