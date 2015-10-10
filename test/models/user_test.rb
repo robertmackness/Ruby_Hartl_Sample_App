@@ -4,12 +4,12 @@ class UserTest < ActiveSupport::TestCase
 
   #run before each test
   def setup
-    @user = User.new( name: "Example User", 
-                      email: "user@example.com",
+    @user = User.new( name: "Archer", 
+                      email: "archer@example.com",
                       password: "foobar",
                       password_confirmation: "foobar")
-    @user2 = User.new(name: "Example User 2", 
-                      email: "user2@example.com",
+    @user2 = User.new(name: "Lana", 
+                      email: "lana@example.com",
                       password: "foobar2",
                       password_confirmation: "foobar2")
   end
@@ -77,6 +77,17 @@ class UserTest < ActiveSupport::TestCase
     assert_difference 'Micropost.count', -1 do 
       @user.destroy 
     end
+  end
+
+  test "should follow and unfollow a user" do
+    elmo = users(:example_user1)
+    grouch = users(:example_user2)
+    assert_not elmo.following?(grouch)
+    elmo.follow(grouch)
+    assert elmo.following?(grouch)
+    assert grouch.followers.include?(elmo)
+    elmo.unfollow(grouch)
+    assert_not elmo.following?(grouch)
   end
 
 end

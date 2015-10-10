@@ -3,6 +3,23 @@ class User < ActiveRecord::Base
   # the has_many association method can take a hash of options. dependant: :destroy 
   # ensures that when a user is destroyed, all associated microposts are also destroyed
   has_many :microposts, dependent: :destroy
+  
+  ####### FOLLOWERS/FOLLOWING ##############
+  # note that below we are defining :active_relationships and :passive_relationships based on the same
+  # data model, just specifying different foreign_leys
+  has_many :active_relationships,  class_name:   "Relationship",
+                                   foreign_key:  "follower_id",
+                                   dependent:    :destroy
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  # note that :following below doesn't actually exist, it's a collection drawn from the source :followed
+  # it's a combination of Active Record and array-like behavior, as it sets up the relationship in the db
+  # AND you can also now call methods like user.following.include?(other_user) that happen WITHIN the db
+  # rails doesn't actually pull the records into a local array and search through them
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+  ##########################################
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -89,6 +106,22 @@ class User < ActiveRecord::Base
   def feed
     Micropost.where("user_id = ?", id)
   end
+
+  # Follows a user
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if current_user is following other_user
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
 
 # ############ PRIVATE ###############
 

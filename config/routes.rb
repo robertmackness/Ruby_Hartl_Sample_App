@@ -8,22 +8,30 @@ Rails.application.routes.draw do
   get     'signup'  =>  'users#new'
   #  creates RESTful routes for interacting with User resource
   #
-  #  HTTP     URL                Action    Named Route               Purpose
-  #
-  #  GET      /users             index     users_path                page to list all users
-  #  GET      /users/id          show      user_path(user)           page to show user
-  #  GET      /users/new         new       new_user_path             page to make new user
-  #  POST     /users             create    users_path                action to create a new user
-  #  GET      /users/id/edit     edit      edit_user_path(user)      page to edit a user
-  #  PATCH    /users/id          update    user_path(user)           action to update user
-  #  DELETE   /users/id          destroy   user_path(user)           action to delete user
-  resources :users
+  #  HTTP   |  URL                 |  Action     |  Named Route             |  Purpose
+  #  -------------------------------------------------------------------------------------------------
+  #  GET    |  /users              |  index      | users_path               | page to list all users
+  #  GET    |  /users/id           |  show       | user_path(user)          | page to show user
+  #  GET    |  /users/new          |  new        | new_user_path            | page to make new user
+  #  POST   |  /users              |  create     | users_path               | action to create a new user
+  #  GET    |  /users/id/edit      |  edit       | edit_user_path(user)     | page to edit a user
+  #  PATCH  |  /users/id           |  update     | user_path(user)          | action to update user
+  #  DELETE |  /users/id           |  destroy    | user_path(user)          | action to delete user
+  #  GET    |  /users/id/followers |  followers  | followers_user_path(id)  | show user's followers
+  #  GET    |  /users/id/following |  following  | following_user_path(id)  | show user's follows
+  #  -------------------------------------------------------------------------------------------------
+  resources :users do 
+    member do 
+      get :following, :followers
+    end
+  end
   get     'login'   =>  'sessions#new'
   post    'login'   =>  'sessions#create'
   delete  'logout'  =>  'sessions#destroy'
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
