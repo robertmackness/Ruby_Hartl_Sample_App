@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         log_in @user
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
       # Log the @user in and redirect to the @user's show page.
-      redirect_back_or @user
+      redirect_back_or root_path
       else
       flash[:warning] = "Account not yet activated. Check your email for the activation link."
       redirect_to root_url
